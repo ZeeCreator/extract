@@ -9,6 +9,7 @@
     "start:pm2": "pm2 start src/server.js --name zeroextract-api"
   },
   "dependencies": {
+    "@fastify/middie": "^9.3.2",
     "@fastify/rate-limit": "^9.1.0",
     "axios": "^1.7.2",
     "cheerio": "^1.0.0-rc.12",

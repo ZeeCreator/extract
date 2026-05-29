@@ -1,15 +1,16 @@
-const serverless = require('serverless-http');
 const { buildServer } = require('../src/server');
 
-let server;
+let fastify;
 
-async function handler(req, res) {
-  if (!server) {
-    const fastify = await buildServer();
-    await fastify.ready();
-    server = serverless(fastify);
+module.exports = async (req, res) => {
+  try {
+    if (!fastify) {
+      fastify = await buildServer();
+      await fastify.ready();
+    }
+    fastify.server.emit('request', req, res);
+  } catch (err) {
+    res.statusCode = 500;
+    res.end(JSON.stringify({ success: false, error: 'Internal Server Error' }));
   }
-  return server(req, res);
-}
-
-module.exports = handler;
+};
