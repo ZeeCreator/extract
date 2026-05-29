@@ -2,7 +2,7 @@
   "name": "zeroextract-api",
   "version": "1.0.0",
   "description": "ZeroExtract API - Anime Streaming Extractor REST API Platform",
-  "main": "src/server.js",
+
   "scripts": {
     "dev": "node --watch src/server.js",
     "start": "node src/server.js",

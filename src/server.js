@@ -51,4 +51,20 @@ if (require.main === module) {
   start();
 }
 
-module.exports = { buildServer };
+let cachedFastify;
+
+async function defaultHandler(req, res) {
+  try {
+    if (!cachedFastify) {
+      cachedFastify = await buildServer();
+      await cachedFastify.ready();
+    }
+    cachedFastify.server.emit('request', req, res);
+  } catch (err) {
+    res.statusCode = 500;
+    res.end(JSON.stringify({ success: false, error: 'Internal Server Error' }));
+  }
+}
+
+module.exports = defaultHandler;
+module.exports.buildServer = buildServer;
