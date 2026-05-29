@@ -1,16 +1,5 @@
 {
-  "functions": {
-    "api/index.js": {
-      "runtime": "nodejs18.x",
-      "memory": 256,
-      "maxDuration": 30
-    }
-  },
   "rewrites": [
-    { "source": "/api/extract", "destination": "/api/index" },
-    { "source": "/proxy", "destination": "/api/index" },
-    { "source": "/player", "destination": "/api/index" },
-    { "source": "/embed", "destination": "/api/index" },
-    { "source": "/health", "destination": "/api/index" }
+    { "source": "/(.*)", "destination": "/api/index" }
   ]
 }
